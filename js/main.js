@@ -68,3 +68,40 @@ async function getPokemon(resource) {
         console.error(error.message);
     }
 }
+
+async function searchPokemon() {
+    if (loading) return ;
+    let search = document.querySelector('input[type="search"]').value;
+    if (search != "") {
+        loading = true;
+        const pokemon = await getPokemon("pokemon/" + search);
+        loading = false;
+        return pokemon;
+    }    
+}
+
+function capitalizefirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function carousel(sprites) {
+    return `<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src = " ${sprites.other["official-artwork"].front_default}" class ="d-block w-100" alt= Padrão">
+                    </div>
+                    <div class="carousel-item">
+                    <img src = " ${sprites.other["official-artwork"].front_shiny}" class ="d-block w-100" alt= Shiny">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>`;
+}
+
